@@ -1,0 +1,17 @@
+sbnz\integracija\example\facts\Item$Category.class
+sbnz\integracija\example\facts\Item.class
+sbnz\integracija\example\SampleApp.class
+sbnz\integracija\example\facts\Karakteristike.class
+sbnz\integracija\example\facts\RegisteredUser$TipLjubimca.class
+sbnz\integracija\example\facts\Admin.class
+sbnz\integracija\example\facts\RegisteredUser$Pol.class
+sbnz\integracija\example\facts\User.class
+sbnz\integracija\example\facts\Destinacija.class
+sbnz\integracija\example\SampleAppService.class
+sbnz\integracija\example\facts\RegisteredUser$RadniStatus.class
+sbnz\integracija\example\facts\Smestaj.class
+sbnz\integracija\example\SampleAppController.class
+sbnz\integracija\example\facts\RegisteredUser.class
+sbnz\integracija\example\facts\Authority.class
+sbnz\integracija\example\SampleHomeController.class
+sbnz\integracija\example\facts\VerificationToken.class
