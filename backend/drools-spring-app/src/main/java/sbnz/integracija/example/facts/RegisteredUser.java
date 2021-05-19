@@ -1,40 +1,61 @@
 package sbnz.integracija.example.facts;
 
 import java.util.Date;
+import java.util.List;
+import java.util.Set;
 
+import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
 
 @Entity
 @DiscriminatorValue("ROLE_USER")
-public class RegisteredUser extends User{
-	
-	public enum Pol {MUSKO, ZENSKO};
-	public enum TipLjubimca {MALI, VELIKI};
-	public enum RadniStatus {STUDENT, ZAPOSLEN, NEZAPOSLEN, PENZIONER};
-	//public enum BracniStatus {} mozda da je ozenjen kao sa porodicom
-	
+public class RegisteredUser extends User {
+
+	public enum Pol {
+		MUSKO, ZENSKO
+	};
+
+	public enum TipLjubimca {
+		MALI, VELIKI
+	};
+
+	public enum RadniStatus {
+		STUDENT, ZAPOSLEN, NEZAPOSLEN, PENZIONER
+	};
+	// public enum BracniStatus {} mozda da je ozenjen kao sa porodicom
+
 	@Column
 	private String name;
-	
+
 	@Column
 	private String surname;
-	
+
 	@Column
 	private int godiste;
-	
+
 	@Column
 	private Pol pol;
-	
+
 	@Column
 	private TipLjubimca tipLjubimca;
-	
+
 	@Column
 	private RadniStatus radniStatus;
-	
+
 	@Column
 	private Date vakcinacija;
+
+	@ElementCollection(fetch = FetchType.LAZY)
+	@CollectionTable(name = "kolekcija", joinColumns = @JoinColumn(name = "ID"))
+	@Enumerated(EnumType.STRING)
+	private List<Karakteristike> preferences;
 
 	public RegisteredUser() {
 		super();
@@ -106,5 +127,17 @@ public class RegisteredUser extends User{
 
 	public void setVakcinacija(Date vakcinacija) {
 		this.vakcinacija = vakcinacija;
+	}
+	
+	public List<Karakteristike> getPreferences() {
+		return preferences;
+	}
+
+	public void setPreferences(List<Karakteristike> preferences) {
+		this.preferences = preferences;
+	}
+
+	public void addPreference(Karakteristike karakteristike) {
+			this.getPreferences().add(karakteristike);
 	}
 }

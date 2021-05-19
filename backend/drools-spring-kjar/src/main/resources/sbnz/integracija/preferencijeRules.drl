@@ -1,0 +1,18 @@
+package sbnz.integracija;
+
+import sbnz.integracija.example.facts.RegisteredUser;
+import sbnz.integracija.example.facts.Odgovor;
+import sbnz.integracija.example.facts.Karakteristke;
+
+rule "smeta buka DA"
+    agenda-group "questions"
+    //no-loop
+    when
+        RegisteredUser( $preferences: preferences ) //????
+        //nase - da imamo klasu odgovor koja ce imati boolean polja mir, sunce, voda...
+        //Odgovor ( mir == true ) 
+        $o: Odgovor( mir == true )
+    then
+        $preference.addPreference(Karakteristke.Mir);
+        System.out.println("DODAT MIR U PREFERENCIJE");
+end
