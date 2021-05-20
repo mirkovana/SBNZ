@@ -2,7 +2,6 @@ package sbnz.integracija.example.facts;
 
 import java.util.Date;
 import java.util.List;
-import java.util.Set;
 
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
@@ -41,12 +40,15 @@ public class RegisteredUser extends User {
 	private int godiste;
 
 	@Column
+	@Enumerated(EnumType.STRING)
 	private Pol pol;
 
 	@Column
+	@Enumerated(EnumType.STRING)
 	private TipLjubimca tipLjubimca;
 
 	@Column
+	@Enumerated(EnumType.STRING)
 	private RadniStatus radniStatus;
 
 	@Column

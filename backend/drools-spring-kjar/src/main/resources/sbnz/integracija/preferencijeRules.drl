@@ -8,11 +8,15 @@ rule "smeta buka DA"
     agenda-group "questions"
     //no-loop
     when
+       System.out.println("DODAT MIR U PREFERENCIJE");
         RegisteredUser( $preferences: preferences ) //????
         //nase - da imamo klasu odgovor koja ce imati boolean polja mir, sunce, voda...
         //Odgovor ( mir == true ) 
         $o: Odgovor( mir == true )
     then
-        $preference.addPreference(Karakteristke.Mir);
+        $preference.addPreference(karakteristike);
+        
+        $o.setMir(false);
+        update($o);
         System.out.println("DODAT MIR U PREFERENCIJE");
 end
