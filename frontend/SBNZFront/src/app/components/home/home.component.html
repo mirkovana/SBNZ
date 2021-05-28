@@ -1,0 +1,72 @@
+<div class="container">
+    <h1 class="naslov">Recite nam nesto o sebi...</h1>
+    <br>
+    <div class="mir">
+        <label for="mir" class="mirLabela">Da li Vam smeta buka?</label>
+        <mat-radio-group aria-label="Da li Vam smeta buka?" name="mir" [(ngModel)]="mir">
+            <mat-radio-button value="da">Da</mat-radio-button>
+            <mat-radio-button value="ne">Ne</mat-radio-button>
+        </mat-radio-group>
+    </div>
+    <div class="mir">
+        <label for="sunce" class="mirLabela">Da li Vam smetaju visoke temperature?</label>
+        <mat-radio-group aria-label="Da li Vam smetaju visoke temperature?" name="sunce" [(ngModel)]="sunce">
+            <mat-radio-button value="da">Da</mat-radio-button>
+            <mat-radio-button value="ne">Ne</mat-radio-button>
+        </mat-radio-group>
+    </div>
+    <div class="mir">
+        <label for="voda" class="mirLabela">Da li volite da plivate?</label>
+        <mat-radio-group aria-label="Da li volite da plivate?" name="voda" [(ngModel)]="voda">
+            <mat-radio-button value="da">Da</mat-radio-button>
+            <mat-radio-button value="ne">Ne</mat-radio-button>
+        </mat-radio-group>
+    </div>
+    <div class="mir">
+        <label for="aktivanOdmor" class="mirLabela">Da li preferirate aktivan odmor?</label>
+        <mat-radio-group aria-label="Da li preferirate aktivan odmor?" name="aktivanOdmor" [(ngModel)]="aktivanOdmor">
+            <mat-radio-button value="da">Da</mat-radio-button>
+            <mat-radio-button value="ne">Ne</mat-radio-button>
+        </mat-radio-group>
+    </div>
+    <div class="mir">
+        <label for="individualniObilazak" class="mirLabela">Da li volite da upoznajete nove ljude na putovanjima?</label>
+        <mat-radio-group aria-label="Da li volite da upoznajete nove ljude na putovanjima?" name="individualniObilazak" [(ngModel)]="individualniObilazak">
+            <mat-radio-button value="da">Da</mat-radio-button>
+            <mat-radio-button value="ne">Ne</mat-radio-button>
+        </mat-radio-group>
+    </div>
+    <div class="mir">
+        <label for="znamenitosti" class="mirLabela">Da li volite da obilazite kulturne znamenitosti?</label>
+        <mat-radio-group aria-label="Da li volite da obilazite kulturne znamenitosti?" name="znamenitosti" [(ngModel)]="znamenitosti">
+            <mat-radio-button value="da">Da</mat-radio-button>
+            <mat-radio-button value="ne">Ne</mat-radio-button>
+        </mat-radio-group>
+    </div>
+    <div class="mir">
+        <label for="dugPut" class="mirLabela">Da li imate problem sa dugim putovanjima?</label>
+        <mat-radio-group aria-label="Da li imate problem sa dugim putovanjima?" name="dugPut" [(ngModel)]="dugPut">
+            <mat-radio-button value="da">Da</mat-radio-button>
+            <mat-radio-button value="ne">Ne</mat-radio-button>
+        </mat-radio-group>
+    </div>
+    <div class="mir">
+        <label for="svezVazduh" class="mirLabela">Da li preferirate svez(planinski) vazduh?</label>
+        <mat-radio-group aria-label="Da li preferirate svez(planinski) vazduh?" name="svezVazduh" [(ngModel)]="svezVazduh">
+            <mat-radio-button value="da">Da</mat-radio-button>
+            <mat-radio-button value="ne">Ne</mat-radio-button>
+        </mat-radio-group>
+    </div>
+    <div class="mir">
+        <label for="medNadzor" class="mirLabela">Da li Vam je potreban medicinski nadzor?</label>
+        <mat-radio-group aria-label="Da li Vam je potreban medicinski nadzor?" name="medNadzor" [(ngModel)]="medNadzor">
+            <mat-radio-button value="da">Da</mat-radio-button>
+            <mat-radio-button value="ne">Ne</mat-radio-button>
+        </mat-radio-group>
+    </div>
+    <div class="mir">
+        <button mat-raised-button color="accent" (click)="posaljiOdgovore()">Posalji</button>
+    </div>
+
+</div>
+

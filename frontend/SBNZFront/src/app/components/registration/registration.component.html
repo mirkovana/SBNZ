@@ -1,0 +1,72 @@
+<form [formGroup]="registerForm" class="novaForma" (ngSubmit)="onSubmit()">
+    <h2>Register</h2>
+    <div class="form-group">
+        <label for="name">Ime</label>
+        <input type="text" name="name" formControlName="name" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.name.errors }" />
+        <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+            <div *ngIf="f.name.errors.required" name = "nameReq">First Name is required</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="surname">Prezime</label>
+        <input type="text" name="surname" formControlName="surname" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.surname.errors }" />
+        <div *ngIf="submitted && f.surname.errors" class="invalid-feedback">
+            <div *ngIf="f.surname.errors.required" name = "surnameReq">Last Name is required</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="username">Email</label>
+        <input type="text" name="username" formControlName="username" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
+        <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+            <div *ngIf="f.username.errors.required" name = "emailReq">Email is required</div>
+            <div *ngIf="f.username.errors.email" name="usernameEmailFormatRegistration">Email is not in valid format</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="password">Lozinka</label>
+        <input type="password" name="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+        <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+            <div *ngIf="f.password.errors.required" name = "passwordReq">Password is required</div>
+            <div *ngIf="f.password.errors.minlength" name = "passwordShort">Password must be at least 6 characters</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="pol">Pol</label>
+        <select name="pol" id="pol" formControlName="pol" class="form-control">
+            <option value="MUSKO">Muski</option>
+            <option value="ZENSKO">Zenski</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="godiste">Godiste</label>
+        <input type="number" name="godiste" id="godiste" formControlName="godiste" class="form-control" size="4" maxlength="4" value="" />
+    </div>
+    <div class="form-group">
+        <label for="radniStatus">Radni status</label>
+        <select name="radniStatus" id="radniStatus" formControlName="radniStatus" class="form-control">
+            <option value="STUDENT">Student</option>
+            <option value="ZAPOSLEN">Zaposlen</option>
+            <option value="NEZAPOSLEN">Nezaposlen</option>
+            <option value="PENZIONER">Penzioner</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="tipLjubimca">Tip ljubimca</label>
+        <select name="tipLjubimca" id="tipLjubimca" formControlName="tipLjubimca" class="form-control">
+            <option value="MALI">Mali</option>
+            <option value="VELIKI">Veliki</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="vakcinacija">Datum vakcinacije ljubimca</label>
+        <input type="date" id="vakcinacija" name="vakcinacija" formControlName="vakcinacija" class="form-control">
+    </div>
+
+    <div class="form-group">
+        <button  class="btn btn-primary" name="registrationButton">
+            
+            Register
+        </button>
+        <a routerLink="/login" class="btn btn-link">Cancel</a>
+    </div>
+</form>
