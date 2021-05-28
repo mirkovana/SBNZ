@@ -1,0 +1,17 @@
+package sbnz.integracija;
+
+import com.example.SBNZApp.facts.*;
+
+rule "Destinacija" 
+    agenda-group "destinacije"
+	salience ((100*$value) / $karakteristike.size())
+    when
+        $d: Destinacija($naziv: naziv, $karakteristike: preferences)
+        $r: RegisteredUser(trenutnaDestinacija == null, $preferences: preferences)
+        Number($value: intValue >= 4) from accumulate(
+        	Karakteristika($t:this, this memberOf $karakteristike) from $preferences,
+        	count($t)
+        )
+    then
+    	modify($r) { setTrenutnaDestinacija($d) }
+end

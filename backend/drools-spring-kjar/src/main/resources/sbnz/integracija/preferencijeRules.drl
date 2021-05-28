@@ -1,22 +1,131 @@
 package sbnz.integracija;
 
-import sbnz.integracija.example.facts.RegisteredUser;
-import sbnz.integracija.example.facts.Odgovor;
-import sbnz.integracija.example.facts.Karakteristke;
+import com.example.SBNZApp.facts.RegisteredUser;
+import com.example.SBNZApp.facts.Odgovor;
+
 
 rule "smeta buka DA"
     agenda-group "questions"
-    //no-loop
     when
-       System.out.println("DODAT MIR U PREFERENCIJE");
-        RegisteredUser( $preferences: preferences ) //????
-        //nase - da imamo klasu odgovor koja ce imati boolean polja mir, sunce, voda...
-        //Odgovor ( mir == true ) 
+        $r: RegisteredUser()
         $o: Odgovor( mir == true )
     then
-        $preference.addPreference(karakteristike);
-        
-        $o.setMir(false);
-        update($o);
-        System.out.println("DODAT MIR U PREFERENCIJE");
+        $r.getKar().add("Mir");
+end
+
+rule "smeta buka NE"
+    agenda-group "questions"
+    when
+        $r: RegisteredUser()
+        $o: Odgovor( mir == false )
+    then
+        $r.getKar().add("Urbano");
+end
+
+rule "preferira aktivan odmor DA"
+    agenda-group "questions"
+    when
+        $r: RegisteredUser()
+        $o: Odgovor( aktivanOdmor == true )
+    then
+        $r.getKar().add("OdmorSaAktivnostima");
+end
+
+rule "preferira aktivan odmor NE"
+    agenda-group "questions"
+    when
+        $r: RegisteredUser()
+        $o: Odgovor( aktivanOdmor == false )
+    then
+        $r.getKar().add("OdmorBezAktivnosti");
+end
+
+rule "smeta visoka temperatura DA"
+    agenda-group "questions"
+    when
+        $r: RegisteredUser()
+        $o: Odgovor( sunce == false )
+    then
+        $r.getKar().add("Hlad");
+end
+
+rule "smeta visoka temperatura NE"
+    agenda-group "questions"
+    when
+        $r: RegisteredUser()
+        $o: Odgovor( sunce == true )
+    then
+        $r.getKar().add("Sunce");
+end
+
+rule "strah od vode NE"
+    agenda-group "questions"
+    when
+        $r: RegisteredUser()
+        $o: Odgovor( voda == true )
+    then
+        $r.getKar().add("Voda");
+end
+
+rule "problem dugo putovanje DA"
+    agenda-group "questions"
+    when
+        $r: RegisteredUser()
+        $o: Odgovor( dugPut == false )
+    then
+        $r.getKar().add("KratakPut");
+end
+
+rule "problem dugo putovanje NE"
+    agenda-group "questions"
+    when
+        $r: RegisteredUser()
+        $o: Odgovor( dugPut == true )
+    then
+        $r.getKar().add("DugPut");
+end
+
+rule "svez vazduh DA"
+    agenda-group "questions"
+    when
+        $r: RegisteredUser()
+        $o: Odgovor( svezVazduh == true )
+    then
+        $r.getKar().add("SvezVazduh");
+end
+
+rule "novi ljudi DA"
+    agenda-group "questions"
+    when
+        $r: RegisteredUser()
+        $o: Odgovor( individualniObilazak == false )
+    then
+        $r.getKar().add("GrupniObilazak");
+end
+
+rule "novi ljudi NE"
+    agenda-group "questions"
+    when
+        $r: RegisteredUser()
+        $o: Odgovor( individualniObilazak == true )
+    then
+        $r.getKar().add("IndividualniObilazak");
+end
+
+rule "medicinski nadzor DA"
+    agenda-group "questions"
+    when
+        $r: RegisteredUser()
+        $o: Odgovor( medNadzor == true )
+    then
+        $r.getKar().add("MedicinskiNadzor");
+end
+
+rule "kulturne znamenitosti DA"
+    agenda-group "questions"
+    when
+        $r: RegisteredUser()
+        $o: Odgovor( znamenitosti == true )
+    then
+        $r.getKar().add("KulturniSadrzaj");
 end
