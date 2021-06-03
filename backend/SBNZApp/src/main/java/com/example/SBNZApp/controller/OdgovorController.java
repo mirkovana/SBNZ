@@ -8,6 +8,9 @@ import org.kie.api.runtime.KieSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,14 +36,14 @@ public class OdgovorController {
     private KarakteristikaService karakteristikaService;
 	
 	
-	@PostMapping(path = "/nesto", consumes = "application/json")
-    public ResponseEntity<?> kupiOdgovore(@Valid @RequestBody Odgovor odgovor){//@Valid @RequestBody Odgovor odgovor
+	@PostMapping(path = "/nesto/{id}", consumes = "application/json")
+    public ResponseEntity<?> kupiOdgovore(@Valid @RequestBody Odgovor odgovor, @PathVariable Long id){//@Valid @RequestBody Odgovor odgovor
         KieSession kieSession = kieContainer.newKieSession();
 
 //        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 //        String currentPrincipalName = authentication.getName();
         //-----------------------------------------------------------------------------------------------
-        RegisteredUser user  = (RegisteredUser)userService.findByUsername("kor1@nesto.com");
+        RegisteredUser user  = (RegisteredUser)userService.get(id);
 
         kieSession.insert(user);
         kieSession.insert(odgovor);

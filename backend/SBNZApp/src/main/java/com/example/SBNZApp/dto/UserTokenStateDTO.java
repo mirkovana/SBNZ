@@ -6,15 +6,18 @@ public class UserTokenStateDTO {
 
  private String accessToken;
  private Long expiresIn;
+ private Long idUser;
 
  public UserTokenStateDTO() {
      this.accessToken = null;
      this.expiresIn = null;
+     this.idUser = null;
  }
 
- public UserTokenStateDTO(String accessToken, long expiresIn) {
+ public UserTokenStateDTO(String accessToken, long expiresIn, long idUser) {
      this.accessToken = accessToken;
      this.expiresIn = expiresIn;
+     this.idUser = idUser;
  }
 
  public String getAccessToken() {
@@ -32,4 +35,12 @@ public class UserTokenStateDTO {
  public void setExpiresIn(Long expiresIn) {
      this.expiresIn = expiresIn;
  }
+
+public Long getIdUser() {
+	return idUser;
+}
+
+public void setIdUser(Long idUser) {
+	this.idUser = idUser;
+}
 }

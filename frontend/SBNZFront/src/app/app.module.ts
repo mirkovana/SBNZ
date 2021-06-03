@@ -19,6 +19,9 @@ import {MatRadioModule} from '@angular/material/radio';
 import {CdkTableModule} from '@angular/cdk/table';
 import {MatButtonModule} from '@angular/material/button';
 import { DestinacijaComponent } from './components/destinacija/destinacija.component';
+import {MatCardModule} from '@angular/material/card';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { SmestajPreporukaComponent } from './components/smestaj-preporuka/smestaj-preporuka.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +29,9 @@ import { DestinacijaComponent } from './components/destinacija/destinacija.compo
     LoginComponent,
     RegistrationComponent,
     HomeComponent,
-    DestinacijaComponent
+    DestinacijaComponent,
+    NavbarComponent,
+    SmestajPreporukaComponent
   ],
   imports: [
     BrowserModule,
@@ -43,7 +48,8 @@ import { DestinacijaComponent } from './components/destinacija/destinacija.compo
     MatNativeDateModule,
     MatRadioModule,
     CdkTableModule,
-    MatButtonModule
+    MatButtonModule,
+    MatCardModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,6 +1,7 @@
 package sbnz.integracija;
 
 import com.example.SBNZApp.facts.*;
+import java.time.LocalDate;
 
 rule "Destinacija" 
     agenda-group "destinacije"
@@ -11,6 +12,10 @@ rule "Destinacija"
         Number($value: intValue >= 4) from accumulate(
         	Karakteristika($t:this, this memberOf $karakteristike) from $preferences,
         	count($t)
+        )
+        not (
+        	Destinacija(naziv == "Daleka destinacija") from $d and 
+            not RegisteredUser($vakcinacija: vakcinacija, $vakcinacija.isAfter(LocalDate.now().minusMonths(6)))           	
         )
     then
     	modify($r) { setTrenutnaDestinacija($d) }

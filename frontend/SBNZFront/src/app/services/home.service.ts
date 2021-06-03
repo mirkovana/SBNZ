@@ -14,7 +14,9 @@ export class HomeService {
   posaljiOdgovor(odgovor: Odgovor){
   const headers = { 'content-type': 'application/json'}  
   const body=JSON.stringify(odgovor);
-  return this.http.post<any>('http://localhost:8080/odgovor/nesto',body, {headers: headers}).subscribe(
+  var korisnik = localStorage.getItem('id')
+  console.log(korisnik)
+  return this.http.post<any>('http://localhost:8080/odgovor/nesto/'+korisnik,body, {headers: headers}).subscribe(
     (val) => {
         console.log("POST call successful value returned in body", 
                     val);
@@ -23,7 +25,8 @@ export class HomeService {
   }
 
   prikaziDestinaciju():Observable<Destinacija>{
-    return this.http.get<Destinacija>("http://localhost:8080/destinacija/nesto");
+    var korisnik = localStorage.getItem('id')
+    return this.http.get<Destinacija>("http://localhost:8080/destinacija/nesto/"+korisnik);
   }
 
 }

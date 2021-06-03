@@ -89,7 +89,7 @@ public class AuthenticationController {
 					int expiresIn = tokenUtils.getExpiredIn();
 
 					// Vrati token kao odgovor na uspesnu autentifikaciju
-					return ResponseEntity.ok(new UserTokenStateDTO(jwt, expiresIn));
+					return ResponseEntity.ok(new UserTokenStateDTO(jwt, expiresIn, user.getID()));
 		}catch(Exception e) {
 			return new ResponseEntity<>("Incorrect username or password.", HttpStatus.BAD_REQUEST);
 		}		

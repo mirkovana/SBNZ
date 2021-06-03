@@ -29,6 +29,7 @@ login(username: string, password: string) {
             if (userTokenState.accessToken) {
                 localStorage.setItem('token', userTokenState.accessToken);
                 localStorage.setItem('username', username);
+                localStorage.setItem('id', userTokenState.idUser);
                 console.log(userTokenState.accessToken)
             }
             else{

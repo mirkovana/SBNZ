@@ -1,10 +1,7 @@
 package com.example.SBNZApp.dto;
 
+import java.time.LocalDate;
 import java.util.Date;
-
-import javax.persistence.Column;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 
 import com.example.SBNZApp.facts.RegisteredUser;
 import com.example.SBNZApp.facts.RegisteredUser.Pol;
@@ -18,7 +15,7 @@ public class UserDTO {
 	private Pol pol;
 	private TipLjubimca tipLjubimca;
 	private RadniStatus radniStatus;
-	private Date vakcinacija;
+	private LocalDate vakcinacija;
     private String username;
 	private String password;
 	
@@ -84,11 +81,11 @@ public class UserDTO {
 		this.radniStatus = radniStatus;
 	}
 
-	public Date getVakcinacija() {
+	public LocalDate getVakcinacija() {
 		return vakcinacija;
 	}
 
-	public void setVakcinacija(Date vakcinacija) {
+	public void setVakcinacija(LocalDate vakcinacija) {
 		this.vakcinacija = vakcinacija;
 	}
 

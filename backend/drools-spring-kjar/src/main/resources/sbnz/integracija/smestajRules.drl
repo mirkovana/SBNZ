@@ -1,0 +1,22 @@
+package sbnz.integracija;
+
+import com.example.SBNZApp.facts.*;
+import java.util.List;
+
+rule "Preporuka smestaja - pronalazenje slicnog korisnika"
+    agenda-group "slican"
+    when
+        $t: TrenutniUser();
+        $r: RegisteredUser(tipLjubimca == $t.getTipLjubimca(), radniStatus == $t.getRadniStatus());
+    then
+        $t.getSlicni().add($r);
+end
+
+rule "Preporuka smestaja - ocena slicnog korisnika"
+    agenda-group "ocena"
+    when
+        $t: TrenutniUser();
+        $p: Putovanje(smestaj.destinacija == $t.getTrenutnaDestinacija(), ocena == 4 || ocena == 5);
+    then
+        $t.getPreporuceniSmestaj().add($p.getSmestaj());
+end

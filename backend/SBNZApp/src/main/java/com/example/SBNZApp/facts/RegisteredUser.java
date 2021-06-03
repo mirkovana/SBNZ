@@ -1,8 +1,10 @@
 package com.example.SBNZApp.facts;
 
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -17,7 +19,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Transient;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 
 @Entity
@@ -57,9 +62,16 @@ public class RegisteredUser extends User {
 	@Column
 	@Enumerated(EnumType.STRING)
 	private RadniStatus radniStatus;
+	
+	@Column
+	@Enumerated(EnumType.STRING)
+	private TipKorisnika tipKorisnika;
 
 	@Column
-	private Date vakcinacija;
+	private LocalDate vakcinacija;
+	
+	@Column
+	private LocalDate datumRegistracije;
 	
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "user_preferences",
@@ -74,6 +86,13 @@ public class RegisteredUser extends User {
 	@Transient
 	private List<String> kar =new ArrayList<String>();
 	
+	@OneToMany(cascade = {CascadeType.ALL}, fetch = FetchType.LAZY, mappedBy = "gost")
+	@JsonBackReference
+	private List<Putovanje> putovanja = new ArrayList<Putovanje>();
+	
+	@Column
+	private int popust;
+	
 	public RegisteredUser(String name, String surname) {
 		super();
 		this.name = name;
@@ -82,6 +101,8 @@ public class RegisteredUser extends User {
 
 	public RegisteredUser() {
 		super();
+		this.datumRegistracije = LocalDate.now();
+		this.popust = 0;
 	}
 
 	public String getName() {
@@ -132,11 +153,11 @@ public class RegisteredUser extends User {
 		this.radniStatus = radniStatus;
 	}
 
-	public Date getVakcinacija() {
+	public LocalDate getVakcinacija() {
 		return vakcinacija;
 	}
 
-	public void setVakcinacija(Date vakcinacija) {
+	public void setVakcinacija(LocalDate vakcinacija) {
 		this.vakcinacija = vakcinacija;
 	}
 
@@ -166,5 +187,41 @@ public class RegisteredUser extends User {
 
 	public void setTrenutnaDestinacija(Destinacija trenutnaDestinacija) {
 		this.trenutnaDestinacija = trenutnaDestinacija;
+	}
+
+	public LocalDate getDatumRegistracije() {
+		return datumRegistracije;
+	}
+
+	public void setDatumRegistracije(LocalDate datumRegistracije) {
+		this.datumRegistracije = datumRegistracije;
+	}
+
+	public List<Putovanje> getPutovanja() {
+		return putovanja;
+	}
+
+	public void setPutovanja(List<Putovanje> putovanja) {
+		this.putovanja = putovanja;
+	}
+
+	public TipKorisnika getTipKorisnika() {
+		return tipKorisnika;
+	}
+
+	public void setTipKorisnika(TipKorisnika tipKorisnika) {
+		this.tipKorisnika = tipKorisnika;
+	}
+
+	public int getPopust() {
+		return popust;
+	}
+
+	public void setPopust(int popust) {
+		this.popust += popust;
+	}
+	
+	public void setPopustOgranicenje(int popust) {
+		this.popust = popust;
 	}
 }
