@@ -85,4 +85,18 @@ openSnackBarUS() {
   });
 }
 
+
+izvestajPremium():Observable<User[]>{
+
+  return this.http.get<User[]>("http://localhost:8080/izvestaj/premium" , {headers:this.headers});
+
+ }
+
+
+izvestajNeaktivan():Observable<User[]>{
+
+  return this.http.get<User[]>("http://localhost:8080/izvestaj/neaktivan" , {headers:this.headers});
+
+ }
+
 }

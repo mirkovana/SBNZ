@@ -14,11 +14,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.SBNZApp.dto.SmestajDTO;
+import com.example.SBNZApp.facts.Destinacija;
 import com.example.SBNZApp.facts.Putovanje;
 import com.example.SBNZApp.facts.RegisteredUser;
 import com.example.SBNZApp.facts.Smestaj;
 import com.example.SBNZApp.facts.TrenutniUser;
 import com.example.SBNZApp.facts.User;
+import com.example.SBNZApp.service.SmestajService;
 import com.example.SBNZApp.service.UserService;
 
 @RestController
@@ -30,6 +32,9 @@ public class SmestajController {
 
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private SmestajService smestajService;
 
 	//@GetMapping(value = "/slican/{id}")
 	public TrenutniUser nadjiSlicne(Long id) {
@@ -78,6 +83,20 @@ public class SmestajController {
 		
 		List<SmestajDTO> dto = new ArrayList<>();
 		for(Smestaj s: trenutni.getPreporuceniSmestaj()) {
+			dto.add(new SmestajDTO(s));
+		}
+
+		return new ResponseEntity<>(dto, HttpStatus.OK);
+	}
+	
+	@GetMapping(value = "/svi/{id}")
+	public ResponseEntity<List<SmestajDTO>> nadjiSveSmestaje(@PathVariable Long id) {
+		RegisteredUser user = (RegisteredUser) userService.get(id); 
+		Destinacija destinacija = user.getTrenutnaDestinacija();
+		List<SmestajDTO> dto = new ArrayList<>();
+		List<Smestaj> listaSmestaja = smestajService.findAllByDestinacija(destinacija);
+		
+		for(Smestaj s: listaSmestaja) {
 			dto.add(new SmestajDTO(s));
 		}
 

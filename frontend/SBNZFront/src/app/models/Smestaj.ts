@@ -1,5 +1,3 @@
-import { Destinacija } from "./Destinacija";
-
 export class Smestaj {
     id: number;
     naziv: string;

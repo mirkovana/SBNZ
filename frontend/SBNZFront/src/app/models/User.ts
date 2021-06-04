@@ -10,4 +10,6 @@ export class User {
     godiste: string;
     vakcinacija: string;
     token: string;
+    tipKorisnika:string;
+    popust:number;
 }

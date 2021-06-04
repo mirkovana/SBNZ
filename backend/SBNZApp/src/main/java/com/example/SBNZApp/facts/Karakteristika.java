@@ -28,6 +28,11 @@ public class Karakteristika {
 		ID = iD;
 		this.naziv = naziv;
 	}
+	
+	public Karakteristika(Karakteristike naziv) {
+ 
+		this.naziv = naziv;
+	}
 
 	public Long getID() {
 		return ID;

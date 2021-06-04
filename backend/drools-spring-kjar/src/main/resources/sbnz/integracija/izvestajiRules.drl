@@ -1,0 +1,52 @@
+package sbnz.integracija;
+
+import com.example.SBNZApp.facts.*;
+import java.time.LocalDate;
+import java.util.List;
+import java.util.Set;
+
+rule "Neaktivan korisnik"
+    agenda-group "neaktivni"
+    when
+        $r: RegisteredUser(tipKorisnika == null, $putovanje: putovanja)
+        accumulate(
+         	Putovanje($p: this, $datum: datum, $datum.isAfter(LocalDate.now().minusMonths(6))) from $putovanje,
+         	$putovanja: collectList($p)
+         )
+         eval($putovanja.size() == 0)
+         RegisteredUser(datumRegistracije.isBefore(LocalDate.now().minusMonths(12)))
+    then
+        modify($r) { setTipKorisnika(TipKorisnika.NEAKTIVNI) }
+end
+
+//FORWARD CHAINING
+rule "Premium korisnik"
+    agenda-group "premium"
+    when
+        $r: RegisteredUser(tipKorisnika == null, $putovanje: putovanja)
+        accumulate(
+         	Putovanje($p: this, $datum: datum, $datum.isAfter(LocalDate.now().minusMonths(12)), $smestaj: smestaj) from $putovanje,
+         	$putovanja: collectList($p),
+         	$smestaji: collectSet($smestaj)
+         )
+         eval($smestaji.size() >= 3)
+         eval($putovanja.size() >= 6)
+    then
+        modify($r) { setTipKorisnika(TipKorisnika.PREMIUM) }
+end
+
+rule "Premium korisnik - dodeljivanje popusta"
+    agenda-group "premium"
+    when
+        $r: RegisteredUser(tipKorisnika == TipKorisnika.PREMIUM)
+    then
+        modify($r) { setPopust($r.getPutovanja().size()*5) }
+end
+
+rule "Premium korisnik - popust ogranicenje"
+    agenda-group "premium"
+    when
+        $r: RegisteredUser(popust>=50)
+    then
+        modify($r) { setPopustOgranicenje(50) }
+end

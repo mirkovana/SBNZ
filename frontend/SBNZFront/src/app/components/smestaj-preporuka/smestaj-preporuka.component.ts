@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Smestaj } from 'src/app/models/Smestaj';
+import { SmestajService } from 'src/app/services/smestaj.service';
 
 @Component({
   selector: 'app-smestaj-preporuka',
@@ -6,10 +8,21 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./smestaj-preporuka.component.scss']
 })
 export class SmestajPreporukaComponent implements OnInit {
-
-  constructor() { }
+  smestaji: Array<Smestaj> = [];
+  constructor(private service : SmestajService) { }
 
   ngOnInit() {
+    
+    this.dobaviSmestajePreporuka();
+    console.log("VRATIO SAM SE" + this.smestaji.length)
+  }
+  dobaviSmestajePreporuka(){
+
+
+    this.service.dobaviSmestajePreporuka().subscribe((data: any)  => {
+      ;
+      this.smestaji = data;
+    });
   }
 
 }

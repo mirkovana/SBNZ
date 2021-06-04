@@ -40,9 +40,7 @@ public class OdgovorController {
     public ResponseEntity<?> kupiOdgovore(@Valid @RequestBody Odgovor odgovor, @PathVariable Long id){//@Valid @RequestBody Odgovor odgovor
         KieSession kieSession = kieContainer.newKieSession();
 
-//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//        String currentPrincipalName = authentication.getName();
-        //-----------------------------------------------------------------------------------------------
+
         RegisteredUser user  = (RegisteredUser)userService.get(id);
 
         kieSession.insert(user);

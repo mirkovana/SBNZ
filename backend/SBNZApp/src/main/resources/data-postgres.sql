@@ -67,9 +67,9 @@ insert into destinacija_preferences (destinacija_id, preference_id) values (5,14
 insert into destinacija_preferences (destinacija_id, preference_id) values (5,12);
 insert into destinacija_preferences (destinacija_id, preference_id) values (5,8);
 
-insert into smestaj (naziv, destinacija_id, lokacija, opis) values ('Hotel Splendid', 1, 'Becici', 'Hotel nema ga na svjetu, prsti od luksuza, samo skupo i bahato.');
+insert into smestaj (naziv, destinacija_id, lokacija, opis) values ('Hotel Splendid', 1, 'Becici', 'Super hotel, hotel sa 5 zvezdica.');
 insert into smestaj (naziv, destinacija_id, lokacija, opis) values ('Hotel Mornar', 1, 'Canj', 'Hotel sa dugom tradicijom, vrhunskom uslugom i prijatnim osobljem.');
-insert into smestaj (naziv, destinacija_id, lokacija, opis) values ('Hotel Barka', 1, 'Budva', 'Tajna naseg naziva lezi u sceni iz serije Budva na pjenu od mora kada se Bojana uplela u Lukinu mrezu...');
+insert into smestaj (naziv, destinacija_id, lokacija, opis) values ('Hotel Barka', 1, 'Budva', 'Na samoj plazi sa prelepim pogledom na more i prirodu.');
 
 insert into putovanje (id_smestaja, id_gosta, datum, ocena) values (1, 2, '2021.04.22', 4);
 insert into putovanje (id_smestaja, id_gosta, datum, ocena) values (2, 2, '2020.08.22', 5);

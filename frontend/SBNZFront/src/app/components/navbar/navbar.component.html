@@ -4,9 +4,9 @@
         <mat-icon>account_circle</mat-icon>
         <nav>
             <ul>
-                <li ><a href="#" onclick="return false;" name="sviSmestaji">Svi smestaji</a></li>
-                <li ><a href="#" onclick="return false;" name="preporuceniSmestaji" >Korisnici slicni Vama preporucuju</a></li>
-                <li ><a href="#" onclick="return false;" name="home">Log out</a></li>
+                <li ><a href="#" onclick="return false;" routerLink="/smestajSvi" name="sviSmestaji">Svi smestaji</a></li>
+                <li ><a href="#" onclick="return false;" routerLink="/smestajPreporuka" name="preporuceniSmestaji" >Korisnici slicni Vama preporucuju</a></li>
+                <li ><a href="#" onclick="return false;" (click) = "logOut()"  name="home">Log out</a></li>
                 </ul>
         </nav>
     </div>

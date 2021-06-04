@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.Date;
 
 import com.example.SBNZApp.facts.RegisteredUser;
+import com.example.SBNZApp.facts.TipKorisnika;
 import com.example.SBNZApp.facts.RegisteredUser.Pol;
 import com.example.SBNZApp.facts.RegisteredUser.RadniStatus;
 import com.example.SBNZApp.facts.RegisteredUser.TipLjubimca;
@@ -18,6 +19,8 @@ public class UserDTO {
 	private LocalDate vakcinacija;
     private String username;
 	private String password;
+	private TipKorisnika tipKorisnika;
+	private int popust;
 	
 	public UserDTO() {}
 	
@@ -31,6 +34,8 @@ public class UserDTO {
 		this.vakcinacija = user.getVakcinacija();
 		this.username = user.getUsername();
 		this.password = user.getPassword();
+		this.tipKorisnika = user.getTipKorisnika();
+		this.popust =user.getPopust();
 	}
 
 	public String getName() {
@@ -103,5 +108,21 @@ public class UserDTO {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public TipKorisnika getTipKorisnika() {
+		return tipKorisnika;
+	}
+
+	public void setTipKorisnika(TipKorisnika tipKorisnika) {
+		this.tipKorisnika = tipKorisnika;
+	}
+
+	public int getPopust() {
+		return popust;
+	}
+
+	public void setPopust(int popust) {
+		this.popust = popust;
 	}
 }

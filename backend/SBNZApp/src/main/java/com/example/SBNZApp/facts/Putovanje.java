@@ -41,6 +41,21 @@ public class Putovanje {
 		this.datum = datum;
 		this.ocena = ocena;
 	}
+	
+	public Putovanje(Smestaj smestaj, RegisteredUser gost,  int ocena, LocalDate datum) {
+		
+		this.smestaj = smestaj;
+		this.gost = gost;
+		this.datum = datum;
+		this.ocena = ocena;
+	}
+	
+	public Putovanje( Smestaj smestaj, RegisteredUser gost,  int ocena) {
+		this.smestaj = smestaj;
+		this.gost = gost;
+	
+		this.ocena = ocena;
+	}
 
 	public Long getID() {
 		return ID;

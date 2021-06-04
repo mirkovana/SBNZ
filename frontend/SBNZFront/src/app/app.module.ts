@@ -22,6 +22,11 @@ import { DestinacijaComponent } from './components/destinacija/destinacija.compo
 import {MatCardModule} from '@angular/material/card';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { SmestajPreporukaComponent } from './components/smestaj-preporuka/smestaj-preporuka.component';
+import { SmestajSviComponent } from './components/smestaj-svi/smestaj-svi.component';
+import { AdminHomeComponent } from './components/admin-home/admin-home.component';
+import { NavbarAdminComponent } from './components/navbar-admin/navbar-admin.component';
+import { PremiumKorisniciComponent } from './components/premium-korisnici/premium-korisnici.component';
+import { NeaktivniKorisniciComponent } from './components/neaktivni-korisnici/neaktivni-korisnici.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +36,12 @@ import { SmestajPreporukaComponent } from './components/smestaj-preporuka/smesta
     HomeComponent,
     DestinacijaComponent,
     NavbarComponent,
-    SmestajPreporukaComponent
+    SmestajPreporukaComponent,
+    SmestajSviComponent,
+    AdminHomeComponent,
+    NavbarAdminComponent,
+    PremiumKorisniciComponent,
+    NeaktivniKorisniciComponent
   ],
   imports: [
     BrowserModule,

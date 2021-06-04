@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.SBNZApp.facts.Destinacija;
 import com.example.SBNZApp.facts.Smestaj;
 import com.example.SBNZApp.repository.SmestajRepository;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -30,5 +31,9 @@ public class SmestajService {
 
 	public void delete(Long id) {
 		repo.deleteById(id);
+	}
+	
+	public List<Smestaj> findAllByDestinacija(Destinacija destinacija) {
+		return repo.findAllByDestinacija(destinacija);
 	}
 }

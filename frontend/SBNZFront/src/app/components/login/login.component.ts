@@ -43,8 +43,15 @@ export class LoginComponent implements OnInit {
           .subscribe(
               data => {
                   // this.router.navigate([this.returnUrl]);
-                  
-                  location.replace("http://localhost:4200/home");
+                  var user = localStorage.getItem('username');
+                  if(user == "admin@nesto.com"){
+                    location.replace("http://localhost:4200/homeAdmin");
+
+                  }
+                  else{
+                    location.replace("http://localhost:4200/home");
+
+                  }
               },
               error => {
                 this.openSnackBarSE();

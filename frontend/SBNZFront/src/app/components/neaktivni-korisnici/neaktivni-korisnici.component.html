@@ -1,0 +1,21 @@
+<app-navbar-admin></app-navbar-admin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr class="text-center">
+            <th  class= "sredina">Ime</th>
+            <th  class= "sredina">Prezime</th>
+            <th  class= "sredina">Tip Korisnika</th>
+         
+        </tr>
+    </thead>
+    <tbody>
+        <tr class="text-center" *ngFor="let u of users">
+            <td>{{u.name}}</td>
+             
+            <td>{{u.surname}}</td>
+            <td>{{u.tipKorisnika}}</td>
+             
+        </tr>
+    </tbody>
+</table>
