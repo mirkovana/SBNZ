@@ -22,24 +22,21 @@ import com.example.SBNZApp.service.UserService;
 @RestController
 @RequestMapping(value = "/izvestaj")
 public class IzvestajController {
-	
-	@Autowired
-    private KieContainer kieContainer;
-	
 	@Autowired
     private UserService userService;
+	
+	@Autowired
+	private KieSession kieSession;
 
 	//POZIV PRAVILA
 	public ResponseEntity<?> postaviNeaktivnog(Long id) {
-		KieSession kieSession = kieContainer.newKieSession();
-
 		RegisteredUser user = (RegisteredUser) userService.get(id);
 
 		kieSession.insert(user);
 
 		kieSession.getAgenda().getAgendaGroup("neaktivni").setFocus();
 		kieSession.fireAllRules();
-		kieSession.dispose();
+		//kieSession.dispose();
 		userService.save(user);
 
 		return new ResponseEntity<>(HttpStatus.OK);
@@ -79,15 +76,13 @@ public class IzvestajController {
 	
 	//POZIV PRAVILA
 	public ResponseEntity<?> postaviPremium(Long id) {
-		KieSession kieSession = kieContainer.newKieSession();
-
 		RegisteredUser user = (RegisteredUser) userService.get(id);
 
 		kieSession.insert(user);
 
 		kieSession.getAgenda().getAgendaGroup("premium").setFocus();
 		kieSession.fireAllRules();
-		kieSession.dispose();
+		//kieSession.dispose();
 		userService.save(user);
 
 		return new ResponseEntity<>(HttpStatus.OK);

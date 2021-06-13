@@ -9,28 +9,41 @@ declare SuspiciousCustomerEvent
     reason: String
 end
 
-declare AlarmTriggered
-    customerId: Long
+//declare AlarmTriggered
+   // customerId: Long
+//end
+
+global SmestajAlarm smestajAlarm;
+//global AlarmTriggered alarmTriggered;
+
+rule "Vise od 5 poseta smestaju u 10 minuta i salje se obavestenje korisniku"
+    agenda-group "cep"
+	when
+	        $t1: PutovanjeEvent($cId: user.ID)
+	        Number(intValue >= 5) from accumulate(
+	            $t2: PutovanjeEvent(
+	                this != $t1, 
+	                user.ID == $cId
+	            )over window:time(10m),
+	            count($t2)
+	        )
+	        not (SuspiciousCustomerEvent(customerId == $cId, reason == "Puno rezervisanih smestaja"))
+	    then
+	        System.out.println("MI PISEMO BUDALASTINE" );
+	        insert(new SuspiciousCustomerEvent($cId, "Puno rezervisanih smestaja"));
+	        smestajAlarm.setUserId($cId);
 end
 
-rule "Vise od 10 poseta smestaju u 10minuta"
+rule "Jedan SuspiciousCustomerEvent u danu i salje se obavestenje administratoru"
     agenda-group "cep"
     when
-        $t1: PutovanjeEvent($cId: user.ID)
-        Number(intValue >= 5) from accumulate(
-            $t2: PutovanjeEvent(
-                this != $t1, 
-                user.ID == $cId              
-                
-            ) over window:time(5s),
-            count($t2)          
+        SuspiciousCustomerEvent($cId: customerId)
+        Number(intValue >= 0) from accumulate(
+            $s: SuspiciousCustomerEvent(customerId == $cId),
+            count($s)
         )
-
     then
-            System.out.println("USAO SAM OVDEEEEEEEE");
-    
-        insert(new SuspiciousCustomerEvent($cId, "Sumnjivo ponasanje, previse putovanja u 10 minuta"));
-        
+        insert(new AlarmTriggered($cId));
 end
 
 /*

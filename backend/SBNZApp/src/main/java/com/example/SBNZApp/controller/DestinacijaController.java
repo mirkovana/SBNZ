@@ -26,9 +26,6 @@ import com.example.SBNZApp.service.UserService;
 @RequestMapping(value = "/destinacija")
 public class DestinacijaController {
 	@Autowired
-    private KieContainer kieContainer;
-	
-	@Autowired
     private UserService userService;
 	
 	@Autowired
@@ -37,14 +34,12 @@ public class DestinacijaController {
 	@Autowired
     private DestinacijaService destinacijaService;
 	
+	@Autowired
+	private KieSession kieSession;
+	
 	
 	@GetMapping(value = "/nesto/{id}")
     public ResponseEntity<DestinacijaDTO> prikaziDestinaciju(@PathVariable Long id){
-		KieSession kieSession = kieContainer.newKieSession();
-
-//      Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//      String currentPrincipalName = authentication.getName();
-      //-----------------------------------------------------------------------------------------------
       RegisteredUser user  = (RegisteredUser)userService.get(id);
       
       List<Destinacija> destinacije = destinacijaService.listAll();
@@ -56,7 +51,7 @@ public class DestinacijaController {
 
       kieSession.getAgenda().getAgendaGroup("destinacije").setFocus();
       kieSession.fireAllRules();
-      kieSession.dispose();
+      //kieSession.dispose();
       userService.save(user);
       DestinacijaDTO ddto = new DestinacijaDTO(user.getTrenutnaDestinacija().getNaziv());
 	  return new ResponseEntity<>(ddto,HttpStatus.OK);

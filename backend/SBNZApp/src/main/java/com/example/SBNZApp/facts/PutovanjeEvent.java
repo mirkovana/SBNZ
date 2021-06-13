@@ -5,10 +5,9 @@ import org.kie.api.definition.type.Role;
 import org.kie.api.definition.type.Timestamp;
 
 @Role(Role.Type.EVENT)
-@Timestamp("executionTime")
 @Expires("10m")
 public class PutovanjeEvent {
-
+//@Timestamp("executionTime")
 	private RegisteredUser user;
 
 	public PutovanjeEvent(RegisteredUser user) {

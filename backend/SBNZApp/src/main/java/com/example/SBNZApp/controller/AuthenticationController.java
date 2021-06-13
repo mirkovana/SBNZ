@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
+import org.kie.api.runtime.KieSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.annotation.Lazy;
@@ -24,6 +25,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.SBNZApp.dto.UserDTO;
 import com.example.SBNZApp.dto.UserLoginDTO;
 import com.example.SBNZApp.dto.UserTokenStateDTO;
+import com.example.SBNZApp.facts.LoginAlarm;
+import com.example.SBNZApp.facts.PokusajLoginaEvent;
 import com.example.SBNZApp.facts.RegisteredUser;
 import com.example.SBNZApp.facts.User;
 import com.example.SBNZApp.security.TokenUtils;
@@ -62,6 +65,9 @@ public class AuthenticationController {
 	
 	@Autowired
 	private VerificationTokenService verificationTokenService;
+	
+	@Autowired
+	private KieSession kieSession;
 
 	// private UserMapper userMapper;
 
@@ -91,6 +97,20 @@ public class AuthenticationController {
 					// Vrati token kao odgovor na uspesnu autentifikaciju
 					return ResponseEntity.ok(new UserTokenStateDTO(jwt, expiresIn, user.getID()));
 		}catch(Exception e) {
+			User user = userService.findByUsername(authenticationRequest.getUsername());
+			if(user != null) {
+				LoginAlarm loginAlarm = new LoginAlarm();
+				PokusajLoginaEvent event = new PokusajLoginaEvent(user);
+				
+				kieSession.setGlobal("loginAlarm", loginAlarm);
+				kieSession.getAgenda().getAgendaGroup("pokusajLogina").setFocus();
+				kieSession.insert(event);
+				kieSession.fireAllRules();
+				
+				if(loginAlarm.getUserID() == user.getID()) {
+					System.out.println("Tri pokusaja logina sa pogresnim kredencijalima od strane jednog korisnika");
+				}
+			}
 			return new ResponseEntity<>("Incorrect username or password.", HttpStatus.BAD_REQUEST);
 		}		
 	}

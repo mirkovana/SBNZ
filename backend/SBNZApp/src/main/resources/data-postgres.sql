@@ -1,7 +1,7 @@
 insert into DESTINACIJA (naziv) values ('More');
 
 INSERT INTO USERS (type, password, username, phone_number) VALUES ('ROLE_ADMIN',  '$2y$10$qHYGGSJnVTs3vVHITJuSwOQyki4XoMO5FgKa.psVze6VKaIJnYi9K','admin@nesto.com', '12345'); --sifra je 1
-INSERT INTO USERS (type, password, username, godiste, name, surname, pol, tip_ljubimca, radni_status, vakcinacija, datum_registracije, popust) VALUES ('ROLE_USER',  '$2y$10$qHYGGSJnVTs3vVHITJuSwOQyki4XoMO5FgKa.psVze6VKaIJnYi9K','kor1@nesto.com', 1998, 'Pera', 'Peric', 'MUSKO', 'MALI', 'STUDENT', '2020.08.22', '2020.08.22', 0); --sifra je 1
+INSERT INTO USERS (type, password, username, godiste, name, surname, pol, tip_ljubimca, radni_status, vakcinacija, datum_registracije, popust) VALUES ('ROLE_USER',  '$2y$10$qHYGGSJnVTs3vVHITJuSwOQyki4XoMO5FgKa.psVze6VKaIJnYi9K','makyns98@gmail.com', 1998, 'Pera', 'Peric', 'MUSKO', 'MALI', 'STUDENT', '2020.08.22', '2020.08.22', 0); --sifra je 1
 INSERT INTO USERS (type, password, username, godiste, name, surname, pol, tip_ljubimca, radni_status, vakcinacija, datum_registracije, id_destinacije, popust) VALUES ('ROLE_USER',  '$2y$10$qHYGGSJnVTs3vVHITJuSwOQyki4XoMO5FgKa.psVze6VKaIJnYi9K','kor2@nesto.com', 1998, 'Pera', 'Peric', 'MUSKO', 'MALI', 'STUDENT', '2021.05.22', '2019.05.22', 1, 0); --sifra je 1
 
 INSERT INTO authority (name) VALUES ('ROLE_ADMIN');

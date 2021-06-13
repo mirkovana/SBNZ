@@ -9,7 +9,10 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.kie.api.KieBase;
+import org.kie.api.KieBaseConfiguration;
 import org.kie.api.KieServices;
+import org.kie.api.conf.EventProcessingOption;
 import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -26,6 +29,7 @@ import com.example.SBNZApp.facts.TrenutniUser;
 @RunWith(SpringRunner.class)
 public class SmestajTest {
 	private static KieContainer kieContainer;
+	private static KieBase kieBase;
 
 	private TrenutniUser trenutniUser;
 
@@ -38,8 +42,10 @@ public class SmestajTest {
 	@Before
 	public void setup() {
 		KieServices kieServices = KieServices.Factory.get();
-		kieContainer = kieServices
-				.newKieContainer(kieServices.newReleaseId("sbnz.integracija", "drools-spring-kjar", "0.0.1-SNAPSHOT"));
+        KieBaseConfiguration config = kieServices.newKieBaseConfiguration();
+		config.setOption(EventProcessingOption.STREAM);
+        kieContainer = kieServices.newKieContainer(kieServices.newReleaseId("sbnz.integracija", "drools-spring-kjar", "0.0.1-SNAPSHOT"));
+        kieBase = kieContainer.newKieBase(config);
 		Destinacija more = new Destinacija();
 		trenutniUser = new TrenutniUser(1998, Pol.MUSKO, TipLjubimca.MALI, RadniStatus.STUDENT, more);
 
@@ -76,7 +82,7 @@ public class SmestajTest {
 
 	@Test
 	public void test_slicni_korisnici() {
-		KieSession kieSession = kieContainer.newKieSession();
+		KieSession kieSession = kieBase.newKieSession();
 		kieSession.getAgenda().getAgendaGroup("slican").setFocus();
 
 		kieSession.insert(trenutniUser);
@@ -91,7 +97,7 @@ public class SmestajTest {
 
 	@Test
 	public void test_smestaj_po_oceni() {
-		KieSession kieSession = kieContainer.newKieSession();
+		KieSession kieSession = kieBase.newKieSession();
 		kieSession.getAgenda().getAgendaGroup("ocena").setFocus();
 
 		kieSession.insert(trenutniUser);

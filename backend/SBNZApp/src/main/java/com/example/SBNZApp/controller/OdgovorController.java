@@ -8,8 +8,6 @@ import org.kie.api.runtime.KieSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -27,20 +25,17 @@ import com.example.SBNZApp.service.UserService;
 @RequestMapping(value = "/odgovor")
 public class OdgovorController {
 	@Autowired
-    private KieContainer kieContainer;
-	
-	@Autowired
     private UserService userService;
 	
 	@Autowired
     private KarakteristikaService karakteristikaService;
 	
+	@Autowired
+	private KieSession kieSession;
+	
 	
 	@PostMapping(path = "/nesto/{id}", consumes = "application/json")
     public ResponseEntity<?> kupiOdgovore(@Valid @RequestBody Odgovor odgovor, @PathVariable Long id){//@Valid @RequestBody Odgovor odgovor
-        KieSession kieSession = kieContainer.newKieSession();
-
-
         RegisteredUser user  = (RegisteredUser)userService.get(id);
 
         kieSession.insert(user);
@@ -48,7 +43,7 @@ public class OdgovorController {
 
         kieSession.getAgenda().getAgendaGroup("questions").setFocus();
         kieSession.fireAllRules();
-        kieSession.dispose();
+        //kieSession.dispose();
         for(String k : user.getKar()) {
         	Karakteristike kkk =Karakteristike.valueOf(k);
         	Karakteristika ka = karakteristikaService.findByNaziv(kkk);

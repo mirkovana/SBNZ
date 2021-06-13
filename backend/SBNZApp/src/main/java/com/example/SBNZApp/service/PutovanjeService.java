@@ -6,34 +6,31 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.SBNZApp.facts.Destinacija;
-import com.example.SBNZApp.repository.DestinacijaRepository;
+import com.example.SBNZApp.facts.Putovanje;
+import com.example.SBNZApp.repository.PutovanjeRepository;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Service
-public class DestinacijaService {
+public class PutovanjeService {
 	
 	@Autowired
-	private DestinacijaRepository repo;
+	private PutovanjeRepository repo;
 	
 	@JsonIgnore
-	public List<Destinacija> listAll() {
+	public List<Putovanje> listAll() {
 		return repo.findAll();
 	}
 
-	public Destinacija save(Destinacija destinacija) {
-		return repo.save(destinacija);
+	public Putovanje save(Putovanje putovanje) {
+		return repo.save(putovanje);
 	}
 
-	public Destinacija get(Long id) {
+	public Putovanje get(Long id) {
 		return repo.findById(id).get();
 	}
 
 	public void delete(Long id) {
 		repo.deleteById(id);
-	}
-	
-	public Destinacija findByNaziv(String naziv) {
-		return repo.findByNaziv(naziv);
 	}
 
 }

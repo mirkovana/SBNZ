@@ -11,7 +11,10 @@ import java.util.Set;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.kie.api.KieBase;
+import org.kie.api.KieBaseConfiguration;
 import org.kie.api.KieServices;
+import org.kie.api.conf.EventProcessingOption;
 import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -25,6 +28,7 @@ import com.example.SBNZApp.facts.RegisteredUser;
 public class DestinacijaTest {
 
 	private static KieContainer kieContainer;
+	private static KieBase kieBase;
 
     private static final String agenda = "destinacije";
 
@@ -37,7 +41,10 @@ public class DestinacijaTest {
     @Before
     public void setup() {
         KieServices kieServices = KieServices.Factory.get();
+        KieBaseConfiguration config = kieServices.newKieBaseConfiguration();
+		config.setOption(EventProcessingOption.STREAM);
         kieContainer = kieServices.newKieContainer(kieServices.newReleaseId("sbnz.integracija", "drools-spring-kjar", "0.0.1-SNAPSHOT"));
+        kieBase = kieContainer.newKieBase(config);
         
         Karakteristika sunce = new Karakteristika(Karakteristike.Sunce);
         Karakteristika voda = new Karakteristika(Karakteristike.Voda);
@@ -100,7 +107,7 @@ public class DestinacijaTest {
    
     @Test
     public void test_destinacija() {
-        KieSession kieSession = kieContainer.newKieSession();
+        KieSession kieSession = kieBase.newKieSession();
         kieSession.getAgenda().getAgendaGroup(agenda).setFocus();
 
 

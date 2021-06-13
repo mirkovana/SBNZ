@@ -11,7 +11,8 @@ import com.example.SBNZApp.facts.Smestaj;
 	 DestinacijaTest.class,
 	 IzvestajTest.class,
 	 SmestajTest.class,
-	 ForwardTest.class
+	 ForwardTest.class,
+	 CepTests.class
 })
 
 public class AllTests {
