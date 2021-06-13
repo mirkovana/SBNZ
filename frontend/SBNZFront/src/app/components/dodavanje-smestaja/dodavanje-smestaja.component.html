@@ -1,0 +1,42 @@
+<app-navbar-admin></app-navbar-admin>
+<form [formGroup]="novSmestajForm" class="novaForma" (ngSubmit)="onSubmit()">
+    <h2>Dodavanje smestaja</h2>
+    <div class="form-group">
+        <label for="naziv">Naziv</label>
+        <input type="text" name="naziv" formControlName="naziv" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.naziv.errors }" />
+        <div *ngIf="submitted && f.naziv.errors" class="invalid-feedback">
+            <div *ngIf="f.naziv.errors.required" name = "nazivReq">Naziv smestaja je obavezan.</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="lokacija">Lokacija</label>
+        <input type="text" name="lokacija" formControlName="lokacija" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.lokacija.errors }" />
+        <div *ngIf="submitted && f.lokacija.errors" class="invalid-feedback">
+            <div *ngIf="f.lokacija.errors.required" name = "lokacijaReq">Lokacija je obavezna.</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="opis">Opis</label>
+        <input type="text" name="opis" formControlName="opis" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.opis.errors }" />
+        <div *ngIf="submitted && f.opis.errors" class="invalid-feedback">
+            <div *ngIf="f.opis.errors.required" name = "opisReq">Opis je obavezan.</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="destinacija">Destinacija</label>
+        <select name="destinacija" id="destinacija" formControlName="destinacija" class="form-control">
+            <option value="Planina">Planina</option>
+            <option value="Banja">Banja</option>
+            <option value="Metropola">Metropola</option>
+            <option value="More">More</option>
+            <option value="Daleka destinacija">Daleka destinacija</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <button  class="btn btn-primary" name="novSmestajButton">
+            Dodaj
+        </button>
+        <a routerLink="/homeAdmin" class="btn btn-link">Cancel</a>
+    </div>
+</form>
+

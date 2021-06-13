@@ -1,0 +1,32 @@
+<app-navbar></app-navbar>
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr class="text-center">
+            <th  class= "sredina">Naziv smestaja</th>
+            <th  class= "sredina">Datum posecivanja</th>
+            <th  class= "sredina" colspan="2">Ocena</th>
+         
+        </tr>
+    </thead>
+    <tbody>
+        <tr class="text-center" *ngFor="let p of putovanja">
+            <td>{{p.smestaj}}</td>
+             
+            <td>{{p.datum}}</td>
+            <td>
+                <mat-select [disabled]="p.ocena!=0" placeholder="{{p.ocena}}" [(ngModel)]="selectedItem">
+                    <mat-option>0</mat-option>
+                    <mat-option value="1">1</mat-option>
+                    <mat-option value="2">2</mat-option>
+                    <mat-option value="3">3</mat-option>
+                    <mat-option value="4">4</mat-option>
+                    <mat-option value="5">5</mat-option>
+                </mat-select>
+            </td>
+            <td>
+                <button mat-button [disabled]="p.ocena!=0" (click)="oceniPutovanje(p.id)">OCENI</button>
+            </td>
+             
+        </tr>
+    </tbody>
+</table>

@@ -25,4 +25,8 @@ export class SmestajPreporukaComponent implements OnInit {
     });
   }
 
+  napadNaSmestaj(smestajId:number){
+    this.service.napadNaSmestaj(smestajId);
+  }
+
 }

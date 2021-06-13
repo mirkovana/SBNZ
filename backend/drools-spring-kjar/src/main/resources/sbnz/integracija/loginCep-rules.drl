@@ -1,0 +1,26 @@
+package sbnz.integracija;
+
+import com.example.SBNZApp.facts.*;
+
+declare SuspiciousUserEvent
+    @role(event)
+    customerId: Long
+    reason: String
+end
+
+global LoginAlarm loginAlarm;
+
+rule "Tri pokusaja logina sa pogresnim kredencijalima od strane jednog korisnika"
+    agenda-group "pokusajLogina"
+    when
+        $ple: PokusajLoginaEvent($id: user.ID, $user: user)
+        Number(intValue == 3) from accumulate (
+            $ple2: PokusajLoginaEvent(user.ID == $id) over window:time(1m),
+            count($ple2)
+        )
+        not (SuspiciousUserEvent(customerId == $id, reason == "Tri pokusaja logina sa pogresnim kredencijalima od strane jednog korisnika"))
+    then
+        insert(new SuspiciousUserEvent($id, "Tri pokusaja logina sa pogresnim kredencijalima od strane jednog korisnika"));
+        System.out.println("USER INSERTOVAN");
+        loginAlarm.setUserID($id);
+end

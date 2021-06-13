@@ -27,6 +27,9 @@ import { AdminHomeComponent } from './components/admin-home/admin-home.component
 import { NavbarAdminComponent } from './components/navbar-admin/navbar-admin.component';
 import { PremiumKorisniciComponent } from './components/premium-korisnici/premium-korisnici.component';
 import { NeaktivniKorisniciComponent } from './components/neaktivni-korisnici/neaktivni-korisnici.component';
+import { PutovanjaComponent } from './components/putovanja/putovanja.component';
+import {MatSelectModule} from '@angular/material/select';
+import { DodavanjeSmestajaComponent } from './components/dodavanje-smestaja/dodavanje-smestaja.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +44,9 @@ import { NeaktivniKorisniciComponent } from './components/neaktivni-korisnici/ne
     AdminHomeComponent,
     NavbarAdminComponent,
     PremiumKorisniciComponent,
-    NeaktivniKorisniciComponent
+    NeaktivniKorisniciComponent,
+    PutovanjaComponent,
+    DodavanjeSmestajaComponent
   ],
   imports: [
     BrowserModule,
@@ -59,7 +64,8 @@ import { NeaktivniKorisniciComponent } from './components/neaktivni-korisnici/ne
     MatRadioModule,
     CdkTableModule,
     MatButtonModule,
-    MatCardModule
+    MatCardModule,
+    MatSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]

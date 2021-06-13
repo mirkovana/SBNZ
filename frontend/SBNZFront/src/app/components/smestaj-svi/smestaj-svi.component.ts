@@ -22,4 +22,9 @@ export class SmestajSviComponent implements OnInit {
       this.smestaji = data;
     });
   }
+
+  napad(smestajId:number){
+    console.log(smestajId);
+    this.service.napadNaSmestaj(smestajId).subscribe((val) => {console.log("IZVRSIO POSETU")});
+  }
 }
