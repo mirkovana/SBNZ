@@ -31,8 +31,10 @@ public class ForwardTest {
 
     private static final String agenda = "premium";
     private RegisteredUser user1;
+    private RegisteredUser user2;
     
 	private List<Putovanje> putovanja;
+	private List<Putovanje> putovanja2;
     @Before
     public void setup() {
     	 KieServices kieServices = KieServices.Factory.get();
@@ -67,6 +69,14 @@ public class ForwardTest {
 		putovanja.add(p6);
 		
 		user1.setPutovanja(putovanja);
+		
+		user2 = new RegisteredUser();
+		Putovanje p7 = new Putovanje(s1, user1, 5, localDate2);
+		putovanja2 = new ArrayList<>();
+		putovanja2.add(p7);
+		user2.setVakcinacija(localDate2);
+		user2.setPutovanja(putovanja2);
+		
     }
     
     @Test
@@ -80,6 +90,45 @@ public class ForwardTest {
         kieSession.fireAllRules();
 
         assertEquals(TipKorisnika.PREMIUM, user1.getTipKorisnika());
+       
+    }
+    @Test
+    public void test_izvestaj_premium_popust() {
+        KieSession kieSession = kieBase.newKieSession();
+        kieSession.getAgenda().getAgendaGroup(agenda).setFocus();
+
+
+        kieSession.insert(user1);
+        
+        kieSession.fireAllRules();
+
+         
         assertTrue(user1.getPopust()>0);
+    }
+    
+    @Test
+    public void test_izvestaj_nije_premium() {
+        KieSession kieSession = kieBase.newKieSession();
+        kieSession.getAgenda().getAgendaGroup(agenda).setFocus();
+
+
+        kieSession.insert(user2);
+        
+        kieSession.fireAllRules();
+
+        assertEquals(null, user2.getTipKorisnika());
+        
+    }
+    @Test
+    public void test_izvestaj_nije_premium_popust() {
+        KieSession kieSession = kieBase.newKieSession();
+        kieSession.getAgenda().getAgendaGroup(agenda).setFocus();
+
+
+        kieSession.insert(user2);
+        
+        kieSession.fireAllRules();
+ 
+        assertTrue(user2.getPopust()==0);
     }
 }

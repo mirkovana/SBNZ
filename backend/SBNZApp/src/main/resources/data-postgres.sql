@@ -1,8 +1,8 @@
 insert into DESTINACIJA (naziv) values ('More');
 
 INSERT INTO USERS (type, password, username, phone_number) VALUES ('ROLE_ADMIN',  '$2y$10$qHYGGSJnVTs3vVHITJuSwOQyki4XoMO5FgKa.psVze6VKaIJnYi9K','admin@nesto.com', '12345'); --sifra je 1
-INSERT INTO USERS (type, password, username, godiste, name, surname, pol, tip_ljubimca, radni_status, vakcinacija, datum_registracije, popust) VALUES ('ROLE_USER',  '$2y$10$qHYGGSJnVTs3vVHITJuSwOQyki4XoMO5FgKa.psVze6VKaIJnYi9K','makyns98@gmail.com', 1998, 'Pera', 'Peric', 'MUSKO', 'MALI', 'STUDENT', '2020.08.22', '2020.08.22', 0); --sifra je 1
-INSERT INTO USERS (type, password, username, godiste, name, surname, pol, tip_ljubimca, radni_status, vakcinacija, datum_registracije, id_destinacije, popust) VALUES ('ROLE_USER',  '$2y$10$qHYGGSJnVTs3vVHITJuSwOQyki4XoMO5FgKa.psVze6VKaIJnYi9K','kor2@nesto.com', 1998, 'Pera', 'Peric', 'MUSKO', 'MALI', 'STUDENT', '2021.05.22', '2019.05.22', 1, 0); --sifra je 1
+INSERT INTO USERS (type, password, username, godiste, name, surname, pol, tip_ljubimca, radni_status, vakcinacija, datum_registracije, popust) VALUES ('ROLE_USER',  '$2y$10$qHYGGSJnVTs3vVHITJuSwOQyki4XoMO5FgKa.psVze6VKaIJnYi9K','makyns98@gmail.com', 1998, 'Mika', 'Mikic', 'MUSKO', 'MALI', 'STUDENT', '2020.08.22', '2020.08.22', 0); --sifra je 1
+INSERT INTO USERS (type, password, username, godiste, name, surname, pol, tip_ljubimca, radni_status, vakcinacija, datum_registracije, popust) VALUES ('ROLE_USER',  '$2y$10$qHYGGSJnVTs3vVHITJuSwOQyki4XoMO5FgKa.psVze6VKaIJnYi9K','kor2@nesto.com', 1998, 'Pera', 'Peric', 'MUSKO', 'MALI', 'STUDENT', '2021.05.22', '2019.05.22',  0); --sifra je 1
 
 INSERT INTO authority (name) VALUES ('ROLE_ADMIN');
 INSERT INTO authority (name) VALUES ('ROLE_USER');
@@ -67,9 +67,30 @@ insert into destinacija_preferences (destinacija_id, preference_id) values (5,14
 insert into destinacija_preferences (destinacija_id, preference_id) values (5,12);
 insert into destinacija_preferences (destinacija_id, preference_id) values (5,8);
 
+--smestaji more
 insert into smestaj (naziv, destinacija_id, lokacija, opis) values ('Hotel Splendid', 1, 'Becici', 'Super hotel, hotel sa 5 zvezdica.');
 insert into smestaj (naziv, destinacija_id, lokacija, opis) values ('Hotel Mornar', 1, 'Canj', 'Hotel sa dugom tradicijom, vrhunskom uslugom i prijatnim osobljem.');
 insert into smestaj (naziv, destinacija_id, lokacija, opis) values ('Hotel Barka', 1, 'Budva', 'Na samoj plazi sa prelepim pogledom na more i prirodu.');
+
+--smestaji Daleka destinacija
+insert into smestaj (naziv, destinacija_id, lokacija, opis) values ('Hotel Grand', 2, 'Maldivi', 'Super hotel, hotel sa 5 zvezdica.');
+insert into smestaj (naziv, destinacija_id, lokacija, opis) values ('Hotel Beach', 2, 'Havaji', 'Hotel sa dugom tradicijom, vrhunskom uslugom i prijatnim osobljem.');
+insert into smestaj (naziv, destinacija_id, lokacija, opis) values ('Hotel Summer', 2, 'Bali', 'Na samoj plazi sa prelepim pogledom na more i prirodu.');
+
+--smestaji planina
+insert into smestaj (naziv, destinacija_id, lokacija, opis) values ('Hotel Sneg', 3, 'Kopaonik', 'Super hotel, hotel sa 5 zvezdica.');
+insert into smestaj (naziv, destinacija_id, lokacija, opis) values ('Hotel Bor', 3, 'Zlatibor', 'Hotel sa dugom tradicijom, vrhunskom uslugom i prijatnim osobljem.');
+insert into smestaj (naziv, destinacija_id, lokacija, opis) values ('Hotel Vrh', 3, 'Tara', 'U mirnom kraju.');
+
+--smestaji banja
+insert into smestaj (naziv, destinacija_id, lokacija, opis) values ('Hotel Mir', 4, 'Vrnjacka Banja', 'Super hotel, hotel sa 5 zvezdica.');
+insert into smestaj (naziv, destinacija_id, lokacija, opis) values ('Hotel Izvorac', 4, 'Prolom Banja', 'Hotel sa dugom tradicijom, vrhunskom uslugom i prijatnim osobljem.');
+insert into smestaj (naziv, destinacija_id, lokacija, opis) values ('Hotel Most', 4, 'Niska Banja', 'U mirnom kraju.');
+
+--smestaji metropola
+insert into smestaj (naziv, destinacija_id, lokacija, opis) values ('Hotel Park', 5, 'Novi Sad', 'Super hotel, hotel sa 5 zvezdica.');
+insert into smestaj (naziv, destinacija_id, lokacija, opis) values ('Hotel Centar', 5, 'Bec', 'Hotel sa dugom tradicijom, vrhunskom uslugom i prijatnim osobljem.');
+insert into smestaj (naziv, destinacija_id, lokacija, opis) values ('Hotel Leopold', 5, 'Milano', 'U samom centru grada.');
 
 insert into putovanje (id_smestaja, id_gosta, datum, ocena) values (1, 2, '2021.04.22', 4);
 insert into putovanje (id_smestaja, id_gosta, datum, ocena) values (2, 2, '2020.08.22', 5);
@@ -81,3 +102,7 @@ insert into putovanje (id_smestaja, id_gosta, datum, ocena) values (1, 2, '2020.
 insert into putovanje (id_smestaja, id_gosta, datum, ocena) values (1, 2, '2020.08.22', 3);
 insert into putovanje (id_smestaja, id_gosta, datum, ocena) values (1, 2, '2020.08.22', 3);
 insert into putovanje (id_smestaja, id_gosta, datum, ocena) values (1, 2, '2020.08.22', 3);
+insert into putovanje (id_smestaja, id_gosta, datum, ocena) values (4, 2, '2020.08.22', 5);
+insert into putovanje (id_smestaja, id_gosta, datum, ocena) values (7, 2, '2020.08.22', 5);
+insert into putovanje (id_smestaja, id_gosta, datum, ocena) values (10, 2, '2020.08.22', 5);
+insert into putovanje (id_smestaja, id_gosta, datum, ocena) values (13, 2, '2020.08.22', 5);

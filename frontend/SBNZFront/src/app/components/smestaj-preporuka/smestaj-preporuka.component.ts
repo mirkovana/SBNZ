@@ -26,7 +26,7 @@ export class SmestajPreporukaComponent implements OnInit {
   }
 
   napadNaSmestaj(smestajId:number){
-    this.service.napadNaSmestaj(smestajId);
+    this.service.napadNaSmestaj(smestajId).subscribe((val) => {console.log("IZVRSIO POSETU")});
   }
 
 }
